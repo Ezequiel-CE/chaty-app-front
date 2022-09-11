@@ -34,7 +34,7 @@ export const registerUser = async (userData: UserRegisterAttribute) => {
     return response.data;
   } catch (error) {
     console.log(error);
-    throw new Error("error al registrar user");
+    throw new Error("cant register user");
   }
 };
 

@@ -14,7 +14,7 @@ import { loginUser } from "../../api/auth.api";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../store/auth.slice";
 
-const initialValues = { mail: "", password: "" };
+const initialValues = { mail: "", password: "", remember: false };
 
 const LoginForm = () => {
   const dispatcher = useDispatch();
@@ -24,12 +24,13 @@ const LoginForm = () => {
       initialValues={initialValues}
       validationSchema={formValidationLogin}
       onSubmit={async (values, actions) => {
+        console.log(values);
         try {
           const { token, user } = await loginUser(values);
-          console.log(token);
-          console.log(user);
           dispatcher(setLogin({ token, user }));
-          window.localStorage.setItem("token", token);
+          if (values.remember) {
+            window.localStorage.setItem("token", token);
+          }
         } catch (error) {
           console.log(error);
         }
@@ -73,7 +74,15 @@ const LoginForm = () => {
               onBlur={formik.handleBlur}
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  color="primary"
+                  id="remember"
+                  name="remember"
+                  onChange={formik.handleChange}
+                />
+              }
               label="Remember me"
             />
             <Button

@@ -7,6 +7,7 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import LoginForm from "./Loginform";
+import mainImg from "../../assets/main.jpg";
 
 export default function Login() {
   return (
@@ -18,7 +19,7 @@ export default function Login() {
         sm={4}
         md={8}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random)",
+          backgroundImage: `url(${mainImg})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
