@@ -10,18 +10,29 @@ import {
 import { Link as RouterLink } from "react-router-dom";
 import { Form as FormikForm, Formik } from "formik";
 import { formValidationLogin } from "../../schemas/formValidation";
+import { loginUser } from "../../api/auth.api";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../store/auth.slice";
 
 const initialValues = { mail: "", password: "" };
 
 const LoginForm = () => {
+  const dispatcher = useDispatch();
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={formValidationLogin}
-      onSubmit={(values, actions) => {
-        console.log({ values, actions });
-        alert(JSON.stringify(values, null, 2));
-        actions.setSubmitting(false);
+      onSubmit={async (values, actions) => {
+        try {
+          const { token, user } = await loginUser(values);
+          console.log(token);
+          console.log(user);
+          dispatcher(setLogin({ token, user }));
+          window.localStorage.setItem("token", token);
+        } catch (error) {
+          console.log(error);
+        }
       }}
     >
       {(formik) => {

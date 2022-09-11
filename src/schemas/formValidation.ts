@@ -11,7 +11,7 @@ export const formValidationRegister = Yup.object({
     .max(255, "Must be 255 characters or less")
     .required("Required"),
   password: Yup.string()
-    .required("No password provided.")
+    .required()
     .min(8, "Password is too short - should be 8 chars minimum."),
 });
 
@@ -22,6 +22,6 @@ export const formValidationLogin = Yup.object({
     .email("Invalid email address")
     .required("Required"),
   password: Yup.string()
-    .required("No password provided.")
+    .required()
     .min(8, "Password is too short - should be 8 chars minimum."),
 });

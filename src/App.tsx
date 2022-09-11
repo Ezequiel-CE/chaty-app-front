@@ -1,14 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import Login from "./components/login/Login";
-import Register from "./components/register/Register";
+import ValidationComponent from "./components/ValidationComponent";
 
 const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
-  );
+  return <ValidationComponent />;
 };
 
 export default App;
